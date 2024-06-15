@@ -18,6 +18,7 @@ public class AuthController {
     @Autowired
     private AuthenticationService authenticationService;
     @PostMapping("/register")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<String> register(@RequestBody SqliUserDto sqliUserDto){
         if(sqliUserRepository.existsByEmail(sqliUserDto.getEmail())) {
             return new ResponseEntity<>("User already existe", HttpStatus.BAD_REQUEST);
@@ -26,6 +27,7 @@ public class AuthController {
         return new ResponseEntity<>("User registred success!", HttpStatus.OK);
     }
     @PostMapping("/login")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<LoginResponseDTO> loginUser(@RequestBody LoginDTO loginDTO) {
         LoginResponseDTO response = authenticationService.loginUser(loginDTO);
         if (response.getUser() != null) {
