@@ -4,6 +4,7 @@ import com.example.dossiermed.Models.RendezVous;
 import com.example.dossiermed.Models.SqliUser;
 import com.example.dossiermed.Repositories.RendezVousRepository;
 import com.example.dossiermed.Repositories.SqliUserRepository;
+import com.example.dossiermed.Repositories.tempsDeTravailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ import java.util.List;
 @Service
 public class CollabServices {
 
+    @Autowired
+    private tempsDeTravailRepository tempsDeTravailable;
     @Autowired
     private SqliUserRepository sqliUserRepository;
     @Autowired
@@ -41,10 +44,14 @@ public class CollabServices {
             rdv.setType(rendezVous.getType());
             rdv.setHeur(rendezVous.getHeur());
             rdv.setMotif(rendezVous.getMotif());
+            rdv.setEmail(rendezVous.getEmail());
             rdv.setStatus(rendezVous.getStatus());
             rdv.setJours(rendezVous.getJours());
             rendezVousRepository.save(rdv);
             return null;
         }).orElse(null);
+    }
+    public String getTempsDeTravail(){
+        return  tempsDeTravailable.toString();
     }
 }

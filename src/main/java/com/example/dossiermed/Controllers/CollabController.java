@@ -29,4 +29,8 @@ public class CollabController {
     public void updateRendezVousForCollaborateur(@PathVariable Long rdvId, @RequestBody RendezVous rendezVous) {
         collabServices.updateRendezVousForCollaborateur(rdvId, rendezVous);
     }
+    @GetMapping("/tempsDeTravail")
+    public String gettempsDeTravail(){
+        return collabServices.getTempsDeTravail();
+    }
 }

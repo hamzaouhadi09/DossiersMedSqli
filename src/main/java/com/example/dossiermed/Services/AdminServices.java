@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -63,5 +64,18 @@ public class AdminServices {
         travail.setHeurDeFin(heurDeFin);
         tempsDeTravail.save(travail);
     }
+    public tempsDeTravail updateTempsDeTravail(int id, tempsDeTravail newTempsDeTravail) {
+        Optional<tempsDeTravail> optionalTempsDeTravail = tempsDeTravail.findById(id);
+        if (optionalTempsDeTravail.isPresent()) {
+            tempsDeTravail existingTempsDeTravail = optionalTempsDeTravail.get();
+            existingTempsDeTravail.setJour(newTempsDeTravail.getJour());
+            existingTempsDeTravail.setHeureDebut(newTempsDeTravail.getHeureDebut());
+            existingTempsDeTravail.setHeurDeFin(newTempsDeTravail.getHeurDeFin());
+            return tempsDeTravail.save(existingTempsDeTravail);
+        } else {
+            throw new RuntimeException("TempsDeTravail not found with id " + id);
+        }
+    }
+
 
 }

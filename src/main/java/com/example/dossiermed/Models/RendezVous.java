@@ -16,13 +16,14 @@ public class RendezVous {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String type;
 
     private String jours;
-
-    private String type;
     private String heur;
+    private String email;
     private String motif;
     private String status;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonBackReference
